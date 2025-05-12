@@ -1,0 +1,33 @@
+lab_name: pdu-order-pattern
+lab_title: "Covert Channel PDU Order Pattern Lab"
+lab_version: "1.0"
+lab_author: "PTIT Security Lab"
+lab_requirements:
+  - docker
+  - labtainer
+pre_lab:
+  - "imodule https://github.com/B21DCAT033/PDU-Order-Pattern/raw/main/imodule.tar"
+
+hosts:
+  - name: Alice
+    image: ubuntu:20.04
+  - name: Bob
+    image: ubuntu:20.04
+
+checkworks:
+  - id: 1
+    host: Alice
+    script: checkwork/check1.sh
+    description: "Introduce PDU Order Pattern covert channel and initialize traffic"
+  - id: 2
+    host: Alice
+    script: checkwork/check2.sh
+    description: "Embed secret bits via packet sequence number sorting"
+  - id: 3
+    host: Bob
+    script: checkwork/check3.sh
+    description: "Receive and capture stego-network packet stream"
+  - id: 4
+    host: Bob
+    script: checkwork/check4.sh
+    description: "Decode secret by evaluating packet order changes"
